@@ -31,7 +31,7 @@ spec:
       volumeMounts:
         - mountPath: "/data"
           name: "kuard-data"
-      livenessProbe:
+      livenessProbe: # 存活探针
         httpGet:
           path: /healthy
           port: 8080
@@ -39,7 +39,7 @@ spec:
         timeoutSeconds: 1
         periodSeconds: 10
         failureThreshold: 3
-      readinessProbe:
+      readinessProbe: # 就绪探针
         httpGet:
           path: /ready
           port: 8080
