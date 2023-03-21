@@ -16,3 +16,9 @@
 #### 获取有关特定节点的更多信息
 
     kubectl describe nodes node-1
+
+#### 删除部署
+
+    删除所有部署
+        kubectl delete deployment --all
+    选择性删除部署 后面加 --selector    
