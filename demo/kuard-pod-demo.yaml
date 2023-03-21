@@ -47,3 +47,6 @@ spec:
         timeoutSeconds: 1
         periodSeconds: 10
         failureThreshold: 3
+  selector:
+    app: alpaca
+    ver: 1
