@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+spec:
+  volumes:
+    - name: "kuard-data"
+      # 使用卷(或者使用下面远程网络存储卷，适用于云环境，只需要选择一种)
+      hostPath: #挂在主机文件系统
+        path: "/var/lib/kuard"
+      #nfs: # 挂载远程网络存储卷
+      #  server: my.nfs.server.local
+      #  path: "/exports"
+  containers:
+    - image: grc.io/kuard-demo/kuard-amd64:blue
+      name: kuard
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+      ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "128Mi"
+        limits:
+          cpu: "1000m"
+          memory: "256Mi"
+      volumeMounts:
+        - mountPath: "/data"
+          name: "kuard-data"
+      livenessProbe:
+        httpGet:
+          path: /healthy
+          port: 8080
+        initialDelaySeconds: 5
+        timeoutSeconds: 1
+        periodSeconds: 10
+        failureThreshold: 3
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: 8080
+        initialDelaySeconds: 30
+        timeoutSeconds: 1
+        periodSeconds: 10
+        failureThreshold: 3
