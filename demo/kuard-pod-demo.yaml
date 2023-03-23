@@ -1,7 +1,13 @@
 apiVersion: v1
 kind: Pod
-metadata:
-  name: kuard
+metadata: #资源的元数据/属性
+  name: test-pod #资源的名字，在同一个namespace中必须唯一
+  labels: #设定资源的标签
+    k8s-app: apache
+    version: v1
+    kubernetes.io/cluster-service: "true"
+  annotations: #自定义注解列表
+    - name: String        #自定义注解名字
 spec:
   volumes:
     - name: "kuard-data"
@@ -47,6 +53,3 @@ spec:
         timeoutSeconds: 1
         periodSeconds: 10
         failureThreshold: 3
-  selector:
-    app: alpaca
-    ver: 1
