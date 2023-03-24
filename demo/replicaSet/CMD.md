@@ -9,7 +9,10 @@
 
 #### 删除副本
 
-    kubectl delete rs nginx-cisco
+    命令如下：
+        kubectl delete rs nginx-cisco
+    删除副本集不删除Pod
+        kubectl delete rs nginx-cisco --cascade=false
 
 #### 伸缩副本
 
