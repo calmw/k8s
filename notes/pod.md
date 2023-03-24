@@ -39,6 +39,7 @@
         kubectl delete -f kuard-pod.yaml
     删除Pod时，Pod不会立即被干掉。如果你运行kubectl get pods,则可以看到Pod处于Terminating状态。所有Pod都有终止宽限期，默认为30。进入Terminating状态的Pod不会再接受新请求。
     删除Pod时存储在相关容器中的所有数据也会被删除。如果你想让Pod跨多个实例持久保存数据，则需要使用持久卷。
+    如果Pod是有service或者deployment之类的命令创建的，直接删Pod有可能会删不掉
 
 #### 访问Pod
 
